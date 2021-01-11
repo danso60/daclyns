@@ -1,0 +1,94 @@
+{% load currency %}
+{% load static %}
+
+<div class="site-section" id="Adikra-section">
+    <div class="container">
+      <div class="row mb-5 justify-content-center">
+        <div class="col-md-6 text-center">
+          <h3 class="section-sub-title">Daclyns Designs</h3>
+          <h2 class="section-title mb-3">Daclyns Designs</h2>
+          <p>We have a wide variety of crafts and artefacts that promotes the African heritage,ranging from
+            jewellery,basketery,wood crafts,African print fabric crafts,ceramics and pots and many more</p>
+        </div>
+      </div>
+      <div class="container pt-3" style="margin-top: 160px;">
+        <div class="row">
+        {% for rs in products_latest %}
+          <div class="col-lg-4 col-md-6 mb-5">
+            <div class="product-item">
+                <figure>
+                  <img src="{{ rs.image.url }}" alt="Image" class="img-fluid">
+                </figure>
+                <div class="px-4">
+                  <h3><a href="">{{ rs.title }}</a></h3>
+                  <p class="mb-4">Available in all sizes and different colours.</p>
+                  <div>
+                    <div class="mb-4">
+      
+                      <div class="price"><span>GHS </span>{{ rs.price }}</div>
+                    </div>
+                    <!-- <a href="#" class="btn btn-black mr-1 rounded-0">Add to Cart</a> -->
+                    
+                    {% if rs.variant == 'None'%}
+                    <!-- <a href="/order/addtoshopcart/{{ rs.id }}" class="btn btn-black btn-outline-black ml-1 rounded-0 add-to-cart">Add to Cart</a> -->
+                    <a href="{% url 'product_detail' rs.id rs.slug %}" class="btn btn-black btn-outline-black ml-1 rounded-0 add-to-cart">ORDER NOW!</a>
+                    {% else %}
+                    <a href="{% url 'product_detail' rs.id rs.slug %}" class="btn btn-black btn-outline-black ml-1 rounded-0 add-to-cart">ORDER NOW!</a>
+                    {% endif %}
+                </div>
+                </div>
+              </div>
+            
+          </div>
+        {%endfor%}
+        </div>
+      </div>
+
+      
+    </div>
+</div>
+<!-- <div class="site-section" id="FacialDesigns-section">
+  <div class="container">
+    <div class="row mb-5 justify-content-center">
+      <div class="col-md-6 text-center">
+        <h3 class="section-sub-title">Facial Designs</h3>
+        <h2 class="section-title mb-3">Facial Designs</h2>
+        <p>We have a wide variety of crafts and artefacts that promotes the African heritage,ranging from
+          jewellery,basketery,wood crafts,African print fabric crafts,ceramics and pots and many more</p>
+      </div>
+    </div>
+    <div class="container pt-3" style="margin-top: 160px;">
+      <div class="row">
+      {% for rs in products_slider %}
+        <div class="col-lg-4 col-md-6 mb-5">
+          <div class="product-item">
+              <figure>
+                <img src="{{ rs.image.url }}" alt="Image" class="img-fluid">
+              </figure>
+              <div class="px-4">
+                <h3><a href="">{{ rs.title }}</a></h3>
+                <p class="mb-4">Available in all sizes and different colours.</p>
+                <div>
+                  <div class="mb-4">
+    
+                    <div class="price"><span>GHS </span>{{ rs.price }}</div>
+                  </div>
+                  
+                  
+                  {% if rs.variant == 'None'%}
+                  
+                  <a href="{% url 'product_detail' rs.id rs.slug %}" class="btn btn-black btn-outline-black ml-1 rounded-0 add-to-cart">ORDER NOW!</a>
+                  {% else %}
+                  <a href="{% url 'product_detail' rs.id rs.slug %}" class="btn btn-black btn-outline-black ml-1 rounded-0 add-to-cart">ORDER NOW!</a>
+                  {% endif %}
+              </div>
+              </div>
+            </div>
+          
+        </div>
+      {%endfor%}
+      </div>
+    </div> -->
+      
+  </div>
+</div>

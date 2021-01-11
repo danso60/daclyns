@@ -1,0 +1,67 @@
+{% load i18n %}
+{% load currency %}
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Daclyns Design</title>
+  <!-- <link rel="stylesheet" href="{%static 'css/bootstrap.css'%}" /> -->
+  <!-- <link rel="stylesheet" href="{%static 'css/responsive.css'%}" /> -->
+  <!-- <link rel="stylesheet" href="{%static 'css/ui.css'%}" /> -->
+  <!-- <link rel="stylesheet" href="{%static 'css/style.css'%}" /> -->
+  <!-- <link rel="stylesheet" href="{%static 'css/jquery-confirm.css'%}"> -->
+  <!-- Font awesome 5 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Daclyns css -->
+  <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css'%}">
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css'%}">
+  <link rel="stylesheet" href="{% static 'css/jquery-ui.css'%}">
+  <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
+  <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css'%}">
+  <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css'%}">
+  <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css'%}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css'%}">
+  <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css'%}">
+  <link rel="stylesheet" href="{% static 'css/aos.css'%}">
+  <link rel="stylesheet" href="{% static 'css/style.css'%}">
+  <link rel="stylesheet" href="{% static 'css/s_style.css'%}">
+  <link rel="stylesheet" href="{% static 'css/joan.css'%}">
+
+  <link type="text/css" rel="stylesheet" href="{% static 'css/slick.css' %}" />
+  <link type="text/css" rel="stylesheet" href="{% static '' %}css/slick-theme.css" />
+
+  <!-- nouislider -->
+  <link type="text/css" rel="stylesheet" href="{% static '' %}css/nouislider.min.css" />
+  <!-- end of daclyns -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
+  <!-- jQuery UI !-->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  <div class="site-wrap">
+  {% include 'header.html' %}
+  {% block sidebar %} {% endblock %}
+  {% block slider %} {% endblock %}
+  {% block body %} {% endblock %}
+  {% block contact %}{% endblock %}
+  {% include 'footer.html' %}
+
+  {% block foot %} {% endblock %}
+  </div>
+</body>
+
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,189 @@
+{% extends 'homebase.html' %}
+{% load currency %}
+{% block title %} Order Page {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMB -->
+    
+    <!-- /BREADCRUMB -->
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container" style="margin-top: 170px;>
+            <!-- row -->
+            <div  class="row">
+                <Form action="" method="post" onsubmit="return submitForm(this);">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        <div class="billing-details">
+
+                            <div class="section-title">
+                                <h4 class="title">Shipping Details</h4>
+                            </div>
+                            <p><label for="id_full_name">Full name:</label>
+                                <input type="text" name="full_name"  value="{{ user.full_name }}" class="input" required id="id_full_name"></p>
+                            
+                            <p><label for="id_email">Email Address:</label>
+                                <input type="text" name="email"  value="{{ user.email }}" class="input" required id="id_email"></p>
+                            <p><label for="id_last_name">Amount :</label>
+                                <input type="number" name="total" value="{{ total }}" class="input" id="id_amount">
+                            <p><label for="id_address">Address:</label>
+                                <input type="text" name="address" value="{{ profile.address }}" class="input" maxlength="150" id="id_address"></p>
+                            <p><label for="id_phone">Phone:</label>
+                                <input type="text" name="phone"  value="{{ profile.phone }}"  class="input" maxlength="20" id="id_phone"></p>
+                            <div class="pull-right">
+                                <a href="{% url 'orderproduct' %}"><button  type="submit" class="primary-btn">Complete Order</button></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-6">
+                        <div class="shiping-methods">
+                            <div class="section-title">
+                                <h4 class="title">Payment Information</h4>
+                            </div>
+                            <p><label for="id_first_name">Total: {{ total }} USD </label>
+                                <input type="text" name="total" class="input" readonly value="${{ total }} "></p>
+                            <p><label for="id_first_name">Credit Card Holder</label>
+                                <input type="text" name="holder" class="input"  value=""></p>
+                            <p><label for="id_first_name">Credit Card Number</label>
+                                <input type="text" name="number" class="input"  value=""></p>
+                            <p><label for="id_first_name">Credit Exp Date/Year</label>
+                                <input type="text" name="ecpdate" class="input"  placeholder="mm/yy"></p>
+                            <p><label for="id_first_name">Security Number</label>
+                                <input type="text" name="secnumber" class="input"  value=""></p>
+                        </div>
+                    </div> -->
+
+                </Form>
+
+                <div class="container " style="margin-top: 170px;">
+                    <div class="row">
+                      <main class="col-sm-9">
+                        {% if shopcart.exists %}
+                        <div class="card">
+                          <table class="table table-hover shopping-cart-wrap cart-table">
+                            <thead class="text-muted">
+                              <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col" width="120">Quantity</th>
+                                <th scope="col" width="120">Price</th>
+                                <th scope="col" width="200" class="text-right">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody class="cart-body">
+                                {% for rs in shopcart %}
+                              <tr class="cart-product">
+                                <td>
+                                    
+                                  <a href="/product/{{ rs.product.id }}/{{ rs.product.slug }}">
+                                    <figure class="media">
+                                      <div class="img-wrap">
+                                        {% if rs.variant.image_id  > 0 %}
+                                        <img width="150"
+                                          src="{{rs.variant.image }}"
+                                          class="img-thumbnail img-sm"
+                                        />
+                                        {% else %}
+                                        <img width="150"
+                                          src="{{rs.product.image.url}}"
+                                          class="img-thumbnail img-sm"
+                                        />
+                                        {% endif %}
+                                      </div>
+                  
+                                      <figcaption class="media-body">
+                                        <h6 class="title text-truncate">
+                                          <a href="/product/{{ rs.product.id }}/{{ rs.product.slug }}">
+                                            {{rs.product}} {{ rs.variant.size }} {{ rs.variant.color }}
+                                          </a>
+                                        </h6>
+                                      </figcaption>
+                                    </figure>
+                                  </a>
+                                </td>
+                                <td>
+                                    <div class="price-wrap">
+                                      <var class="price">{{rs.quantity}}</var>
+                                    
+                                    </div>
+                                    <!-- price-wrap .// -->
+                                  </td>
+                                <td>
+                                  <div class="price-wrap">
+                                    <var class="price">
+                                    {% if rs.product.variant == 'None' %}
+                                        {{ rs.product.price }} GH₵
+                                    {% else %}
+                                        {{ rs.variant.price }} GH₵
+                                    {% endif %}</var>
+                                  </div>
+                                  <!-- price-wrap .// -->
+                                </td>
+                                <td class="text-right">
+                                    <input class="cart-item-product-id" type="hidden" name="product_id" />
+                                    <a href="/order/deletefromcart/{{ rs.id }}" onclick="return confirm('Delete ! Are you sure?')"><button class="btn btn-md  btn-outline-danger" type="submit">
+                                      × Remove
+                                    </button></a>
+                                </td>
+                              </tr>
+                              {%endfor%}
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- card.// -->
+                        {%else%}
+                        <p class="lead">Cart is empty</p>
+                        {%endif%}  
+                      </main>
+                  
+                      <aside class="col-sm-3">
+                        <!-- <dl class="dlist-align h5">
+                          <dt>Sub total:</dt>
+                          <dd class="text-right">GHC {{ cart.subtotal }}</dd>
+                        </dl> -->
+                        <dl class="dlist-align h5">
+                          <dt>Total:</dt>
+                          <dd class="text-right">
+                            <strong
+                              ><span class="cart-total">GH₵ {{ total }} </span></strong
+                            >
+                          </dd>
+                        </dl>
+                        <div class="text-wrap small text-muted">
+                          Delivery fees not included yet.
+                        </div>
+                        <hr />
+                        <tr>
+                          <th colspan="2"></th>
+                          <td>
+                            <a class="btn btn-success btn-block" href="{% url 'orderproduct' %}"
+                              >Buy</a
+                            >
+                          </td>
+                        </tr>
+                      </aside>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /section -->
+    <script>
+      function submitForm() {
+        return confirm('Are you sure you want to proceed to payment?');
+      }
+    </script>
+    
+    
+
+{% endblock %}

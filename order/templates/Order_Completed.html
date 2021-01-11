@@ -1,0 +1,79 @@
+{% extends 'homebase.html' %}
+
+{% block title %} Order Complated {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+<div onload="payWithPaystack()">
+
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script>
+    window.onload=function(){
+      payWithPaystack();
+      
+    };
+    function payWithPaystack(){
+      let handler = PaystackPop.setup({
+        key: "{{pk_public}}",
+        email: "{{ email }}",
+        amount: "{{ total }}" * 100,
+        currency: 'GHS',
+        ref: ""+Math.floor((Math.random()*10000000000)+1),
+
+        onClose: function(){
+          alert('Window Closed.');
+        },
+        callback: function(response){
+          let message = 'Payment complete! Reference: ' + response.reference;
+          alert(message);
+        }
+        
+      });
+      handler.openIframe();
+    }
+
+  </script>
+</div>
+
+
+
+
+    
+
+    
+    <!-- <div class="section" id="campaign-alert" style="display:none;">
+ 
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-12"  id="paymentForm">
+                    <div class="order-summary clearfix">
+                        <div class="section-title">
+                            <h3 class="title">Order Complated</h3>
+                        </div>
+                        <hr>
+                        <h2>Dear  {{ user.full_name }}</h2>
+                        <hr>
+                        <h3>Your order is completed</h3>
+                        <h3>Order Code : {{ ordercode }}</h3>
+                        <h3>Thank You</h3>
+                        <hr>
+                    </div>
+
+                </div>
+
+
+            </div>
+            
+        </div>
+        
+    </div> -->
+    
+    
+
+{% endblock %}
